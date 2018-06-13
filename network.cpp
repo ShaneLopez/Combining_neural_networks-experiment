@@ -86,10 +86,10 @@ void network::backprop(vector<double> error)
     {
         for(int i = 0; i < error.size(); i++)
         {
-            totalerror += error[i];
+            totalerror += fabs(error[i]);
         }
 
-        totalerror = pow(totalerror, 2) / error.size();
+        totalerror = totalerror / error.size();
     }
     else
     {

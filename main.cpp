@@ -80,7 +80,7 @@ int main()
         //clock_t begin = clock();
 
         itcount = 0;
-        while(stoperror > 0.005)
+        while(stoperror > 0.05)
         {
             choice = rand() % inputs.size();
             shorttermmem.forwardpass(inputs[choice]);
@@ -88,7 +88,7 @@ int main()
             for(int j = 0; j < outputs.size(); j++)
             {
                 error.push_back(outputs[j] - expoutputs[i][choice]);
-                sumerror += error[j];
+                sumerror += fabs(error[j]);
             }
             check++;
             shorttermmem.backprop(error);
@@ -98,7 +98,7 @@ int main()
             if(check == 50)
             {
                 //shake++;
-                stoperror = pow(sumerror, 2) / check;
+                stoperror = sumerror / check;
                 sumerror = 0;
                 check = 0;
                 /*if(shake == 20)
@@ -165,9 +165,9 @@ int main()
             for(int j = 0; j < outputs.size(); j++)
             {
                 error.push_back(outputs[j] - learnedexpoutput[choice][j]);
-                localsum += error[j];
+                localsum += fabs(error[j]);
             }
-            localsquare = pow(localsum, 2) / outputs.size();
+            localsquare = localsum / outputs.size();
             sumerror += localsquare;
             localsum = 0;
             check++;
@@ -177,7 +177,7 @@ int main()
             if(check == 50)
             {
                 //shake++;
-                stoperror = pow(sumerror, 2) / check;
+                stoperror = sumerror / check;
                 sumerror = 0;
                 check = 0;
                 /*if(shake == 20)
@@ -244,11 +244,11 @@ int main()
     {
         shorttermmem.forwardpass(inputs[i]);
         shorttermmem.getoutputs(outputs);
-        if(outputs[0] > 0)
+        /*if(outputs[0] > 0)
             cout << 1 << " ";
         else
-            cout << 0 << " ";
-            //cout << outputs[0] << " ";
+            cout << 0 << " ";*/
+            cout << outputs[0] << " ";
     }
 
     cout << endl;
