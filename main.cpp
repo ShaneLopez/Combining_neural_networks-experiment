@@ -157,7 +157,7 @@ int main()
         shake = 0;
         localsum = 0;
 
-        while(stoperror > 1 / (10 * errorcheck))
+        while(stoperror > 0.005)//1 / (10 * errorcheck))
         {
             choice = rand() % learnedindex.size();
             longtermmem[cur].net.forwardpass(expoutputs[learnedindex[choice]]);
@@ -214,8 +214,8 @@ int main()
     cout << endl;
     cout << endl;
 
-    longtermmem[0].net.forwardpass(expoutputs[1]);
-    longtermmem[0].net.getoutputs(outputs);
+    longtermmem[2].net.forwardpass(expoutputs[5]);
+    longtermmem[2].net.getoutputs(outputs);
 
     counter = 0;
     for(int j = 0; j < inputsize; j++)
@@ -244,13 +244,12 @@ int main()
     {
         shorttermmem.forwardpass(inputs[i]);
         shorttermmem.getoutputs(outputs);
-        /*if(outputs[0] > 0)
+        if(outputs[0] > 0)
             cout << 1 << " ";
         else
-            cout << 0 << " ";*/
-            cout << outputs[0] << " ";
+            cout << 0 << " ";
+            //cout << outputs[0] << " ";
     }
-
     cout << endl;
     return 0;
 }
